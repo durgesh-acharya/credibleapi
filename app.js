@@ -1,6 +1,17 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const router = express.Router();
+const port = process.env.PORT || 3000
+
+//routes
+const userRouter = require('./routes/user');
+
+
+//use routes
+app.use(userRouter);
+
+const bodyParser = require('body-parser');
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
