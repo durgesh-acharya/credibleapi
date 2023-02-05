@@ -5,10 +5,11 @@ const port = process.env.PORT || 3000
 
 //routes
 const userRouter = require('./routes/user');
-
+const cateRouter = require('./routes/cate');
 
 //use routes
 app.use(userRouter);
+app.use(cateRouter);
 
 const bodyParser = require('body-parser');
 
