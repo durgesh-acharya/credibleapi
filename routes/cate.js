@@ -28,8 +28,14 @@ router.get('/cate', function(req, res, next) {
       if (err) {
         res.status(500).send({ error: 'Something failed!' })
       }
-      res.setHeader('Content-Type', 'application/json');
-      res.json([{status : true, data : rows, msg : "Catagories retrived successfully!"}])
+      if(rows.length > 0){
+        res.setHeader('Content-Type', 'application/json');
+        res.json([{status : true, data : rows, msg : "Catagories retrived successfully!"}])
+      }else{
+        res.setHeader('Content-Type', 'application/json');
+      res.json([{status : false, data : rows, msg : "Catagories retrived successfully!"}])
+      }
+      
     })
   });
   
