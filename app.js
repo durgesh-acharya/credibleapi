@@ -7,11 +7,13 @@ const port = process.env.PORT || 3000
 const userRouter = require('./routes/user');
 const cateRouter = require('./routes/cate');
 const subcateRouter = require('./routes/subcate');
+const productRouter = require('./routes/product');
 
 //use routes
 app.use(userRouter);
 app.use(cateRouter);
 app.use(subcateRouter);
+app.use(productRouter);
 const bodyParser = require('body-parser');
 
 
