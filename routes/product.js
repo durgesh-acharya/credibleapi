@@ -81,5 +81,27 @@ router.get('/prod/byid/:id', function(req, res, next) {
   })
 });
 
+// fetch product except one
+//  fetch active products by category and sub category
+
+ router.get('/prod/byparam/eone/:prodid/:cate/:subcate', function(req, res, next) {
+  const cate = req.params.cate;
+  const subcate = req.params.subcate;
+  const prodid = req.params.prodid;
+
+  const sql = "SELECT * FROM prod WHERE prod_id <> ? AND prod_cate = ? AND prod_subcate = ?";
+  db.query(sql,[prodid,cate,subcate], function(err, rows, fields) {
+    if(err) {
+      console.log(err);
+      res.status(500).send({ error: 'Something failed!' })
+    } if(rows.length > 0){
+      res.json([{status : true, data : rows, msg : "Product retrived successfully through id!"}])
+    }else{
+      res.json([{status : false, msg : "No Product found"}])
+    }
+      
+  })
+})
+
 
 module.exports=router;
