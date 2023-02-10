@@ -8,12 +8,14 @@ const userRouter = require('./routes/user');
 const cateRouter = require('./routes/cate');
 const subcateRouter = require('./routes/subcate');
 const productRouter = require('./routes/product');
+const productimageurlRouter = require('./routes/prodimg');
 
 //use routes
 app.use(userRouter);
 app.use(cateRouter);
 app.use(subcateRouter);
 app.use(productRouter);
+app.use(productimageurlRouter);
 const bodyParser = require('body-parser');
 
 
