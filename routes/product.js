@@ -61,7 +61,25 @@ router.get('/prod/active', function(req, res, next) {
         
     })
   });
+//fetch product through product id
 
+router.get('/prod/byid/:id', function(req, res, next) {
+  const prodid = req.params.id;
+  const sql = `SELECT * FROM prod WHERE prod_id = ${prodid}`;
+  db.query(sql, function(err, rows, fields) {
+    if (err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }
+    if(rows.length > 0){
+      res.setHeader('Content-Type', 'application/json');
+      res.json([{status : true, data : rows, msg : "Products retrived successfully!"}])
+    }else{
+      res.setHeader('Content-Type', 'application/json');
+    res.json([{status : false, data : rows, msg : "Products not found!"}])
+    }
+    
+  })
+});
 
 
 module.exports=router;
