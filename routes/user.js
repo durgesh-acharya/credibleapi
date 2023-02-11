@@ -39,6 +39,27 @@ router.get('/user/exist/:mobile/:status', function(req, res, next) {
     })
   });
   
+  //user by mobile number
+
+   //user existence check
+ 
+router.get('/user/bymobile/:mobile/:status', function(req, res, next) {
+  const mobile = req.params.mobile;
+  const activestts = req.params.status;
+
+  const sql = "SELECT * FROM user WHERE user_mobile = ? AND user_active = ?";
+  db.query(sql,[mobile,activestts], function(err, row, fields) {
+    if(err) {
+      console.log(err);
+      res.status(500).send({ error: 'Something failed!' })
+    } if(row.length > 0){
+      res.json([{status : true, data : row[0], msg : "User retrived successfully through id!"}])
+    }else{
+      res.json([{status : false, msg : "No User found"}])
+    }
+      
+  })
+});
 
 
 
