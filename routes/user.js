@@ -48,12 +48,12 @@ router.get('/user/bymobile/:mobile/:status', function(req, res, next) {
   const activestts = req.params.status;
 
   const sql = "SELECT * FROM user WHERE user_mobile = ? AND user_active = ?";
-  db.query(sql,[mobile,activestts], function(err, row, fields) {
+  db.query(sql,[mobile,activestts], function(err, rows, fields) {
     if(err) {
       console.log(err);
       res.status(500).send({ error: 'Something failed!' })
-    } if(row.length > 0){
-      res.json([{status : true, data : row[0], msg : "User retrived successfully through id!"}])
+    } if(rows.length > 0){
+      res.json([{status : true, data : rows, msg : "User retrived successfully through id!"}])
     }else{
       res.json([{status : false, msg : "No User found"}])
     }
