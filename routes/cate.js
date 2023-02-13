@@ -39,7 +39,26 @@ router.get('/cate', function(req, res, next) {
     })
   });
   
+// add category
 
+ 
+router.post('/cate/create', function(req, res, next) {
+  const catename = req.body.catename;
+  const catedescription = req.body.catedescription;
+  const cateurl = "";
+  const cateactive = 0;
+
+
+  
+  const sql = `INSERT INTO cate(cate_name, cate_description, cate_url, cate_active) VALUES ('${catename}','${catedescription}','${cateurl}','${cateactive}')`;
+  
+  db.query(sql, function(err, result) {
+    if(err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }
+    res.json({'status': 'success', id: result.insertId})
+  })
+});  
 
 
 
