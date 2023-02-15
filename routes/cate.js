@@ -45,8 +45,8 @@ router.get('/cate', function(req, res, next) {
 router.post('/cate/create', function(req, res, next) {
   const catename = req.body.catename;
   const catedescription = req.body.catedescription;
-  const cateurl = "";
-  const cateactive = 0;
+  const cateurl = req.body.cateurl;
+  const cateactive = req.body.cateactive;
 
 
   
@@ -56,7 +56,7 @@ router.post('/cate/create', function(req, res, next) {
     if(err) {
       res.status(500).send({ error: 'Something failed!' })
     }
-    res.json({'status': 'success', id: result.insertId})
+    res.status(200).send({'status': 'success', 'id': result.insertId})
   })
 });  
 

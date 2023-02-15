@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 const router = express.Router();
+const bodyParser = require('body-parser');
+
+
 const port = process.env.PORT || 3000
 
 //routes
@@ -16,7 +19,8 @@ app.use(cateRouter);
 app.use(subcateRouter);
 app.use(productRouter);
 app.use(productimageurlRouter);
-const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({extended: true}));
 
 
 app.get('/', (req, res) => {
