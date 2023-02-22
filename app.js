@@ -12,7 +12,7 @@ const cateRouter = require('./routes/cate');
 const subcateRouter = require('./routes/subcate');
 const productRouter = require('./routes/product');
 const productimageurlRouter = require('./routes/prodimg');
-const qrRouter = require('/routes/qr');
+const qrRouter = require('./routes/qr');
 
 //use routes
 app.use(userRouter);
