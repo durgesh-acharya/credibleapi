@@ -6,6 +6,39 @@ const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
 
+//show all qr
+router.get('/qr', function(req, res, next) {
+
+    const sql = "SELECT * FROM qr ORDER BY qr_id DESC";
+    db.query(sql, function(err, rows, fields) {
+      if (err) {
+        res.status(500).send({ error: 'Something failed!' })
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.json([{status : true, data : rows, msg : "Catagories retrived successfully!"}])
+    })
+  });
+
+  //qr status wise
+
+  router.get('/qr/fromstatus/:status', function(req, res, next) {
+    const status = req.params.status;
+    const sql = `SELECT * FROM qr WHERE qr_use = ${status} ORDER BY qr_id DESC`;
+    db.query(sql, function(err, rows, fields) {
+      if (err) {
+        res.status(500).send({ error: 'Something failed!' })
+      }
+      if(rows.length > 0){
+        res.setHeader('Content-Type', 'application/json');
+        res.json([{status : true, data : rows, msg : "Catagories retrived successfully!"}])
+      }else{
+        res.setHeader('Content-Type', 'application/json');
+      res.json([{status : false, data : rows, msg : "Catagories retrived successfully!"}])
+      }
+      
+    })
+  });
+
 //create qr
 
 router.post('/qr/create', function(req, res, next) {
