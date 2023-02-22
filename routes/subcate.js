@@ -39,6 +39,8 @@ router.get('/subcate', function(req, res, next) {
     })
   });
 
+  
+
   //fetch sub category by category id
 
   router.get('/subcate/:cate/:status', function(req, res, next) {
@@ -51,13 +53,56 @@ router.get('/subcate', function(req, res, next) {
         console.log(err);
         res.status(500).send({ error: 'Something failed!' })
       } if(rows.length > 0){
-        res.json([{status : true, data : rows, msg : "User retrived successfully through id!"}])
+        res.json([{status : true, data : rows, msg : "Sub retrived successfully through id!"}])
       }else{
-        res.json([{status : false, msg : "No User found"}])
+        res.json([{status : false, msg : "No Sub found"}])
       }
         
     })
   });
+
+  //fetch subcate irespective of status
+
+
+   router.get('/subcateall/:cate', function(req, res, next) {
+    const cate = req.params.cate;
+    const sql = `SELECT * FROM subcate WHERE subcate_cate = ${cate}`;
+    db.query(sql, function(err, rows, fields) {
+      if (err) {
+        res.status(500).send({ error: 'Something failed!' })
+      }
+      if(rows.length > 0){
+        res.setHeader('Content-Type', 'application/json');
+        res.json([{status : true, data : rows, msg : "Catagories retrived successfully!"}])
+      }else{
+        res.setHeader('Content-Type', 'application/json');
+      res.json([{status : false, data : rows, msg : "No Sub category to show!"}])
+      }
+      
+    })
+  });
+
+  // add subcategory
+
+ 
+router.post('/subcate/create', function(req, res, next) {
+  const subcatename = req.body.subcatename;
+  const subcatedescription = req.body.subcatedescription;
+  const subcateurl = req.body.subcateurl;
+  const subcatecate = req.body.subcatecate;
+  const subcatestatus = req.body.subcatestatus;
+
+
+  
+  const sql = `INSERT INTO subcate(subcate_name,subcate_desctiption,subcate_url,subcate_cate,subcate_status) VALUES ('${subcatename}','${subcatedescription}','${subcateurl}','${subcatecate}','${subcatestatus}')`;
+  
+  db.query(sql, function(err, result) {
+    if(err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }
+    res.status(200).send({'status': 'success', 'id': result.insertId})
+  })
+});  
 
   
 
