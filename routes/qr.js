@@ -26,13 +26,15 @@ router.get('/qr', function(req, res, next) {
     const sql = `SELECT * FROM qr WHERE qr_use = ${status} ORDER BY qr_id DESC`;
     db.query(sql, function(err, rows, fields) {
       if (err) {
-        res.status(500).send({ error: 'Something failed!' })
+        res.status(500).send({ error: 'Something failed!' });
       }
       if(rows.length > 0){
         res.setHeader('Content-Type', 'application/json');
+        res.setHeader("Access-Control-Allow-Origin", "*");
         res.json([{status : true, data : rows, msg : "Catagories retrived successfully!"}])
       }else{
         res.setHeader('Content-Type', 'application/json');
+        res.setHeader("Access-Control-Allow-Origin", "*");
       res.json([{status : false, data : rows, msg : "Catagories retrived successfully!"}])
       }
       
