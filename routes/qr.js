@@ -5,6 +5,7 @@ const db = require('../db');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
+var cors = require('cors')
 
 //show all qr
 router.get('/qr', function(req, res, next) {
@@ -42,8 +43,8 @@ router.get('/qr', function(req, res, next) {
   });
 
 //create qr
-
-router.post('/qr/create', function(req, res, next) {
+router.options('/qr/create', cors())
+router.post('/qr/create',cors(), function(req, res, next) {
  
     const qrunique = req.body.qrunique;
     const qruse = req.body.qruse;
