@@ -110,7 +110,28 @@ router.put('/qr/onrr/:qrid',cors(), function(req, res, next) {
     })
   });  
 
+//CHECK WHETHER QR IS USED OR UNUSED
 
+router.get('/qr/usestatus/:qrunique', function(req, res, next) {
+  const qrunique = req.params.qrunique;
+  const qrstatus = 0;
+  const sql = `SELECT * FROM qr WHERE qr_unique = ${qrunique} AND qr_use =${qrstatus}`;
+  db.query(sql, function(err, rows, fields) {
+    if (err) {
+      res.status(500).send({ error: 'Something failed!' });
+    }
+    if(rows.length > 0){
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.json([{status : true, data : rows, msg : "Qr retrived successfully!"}])
+    }else{
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    res.json([{status : false, data : rows, msg : "Qr retrived successfully!"}])
+    }
+    
+  })
+});
 
 
 module.exports=router;
