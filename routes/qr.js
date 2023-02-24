@@ -44,7 +44,7 @@ router.get('/qr', function(req, res, next) {
 //create qr
 
 router.post('/qr/create', function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "http://13.233.160.216");
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     const qrunique = req.body.qrunique;
