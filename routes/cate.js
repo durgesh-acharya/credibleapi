@@ -9,7 +9,7 @@ var cors = require('cors')
 
 // fetch all categories
 router.options('/cate', cors())
-router.get('/cate', function(req, res, next) {
+router.get('/cate',cors(), function(req, res, next) {
 
     const sql = "SELECT * FROM cate";
     db.query(sql, function(err, rows, fields) {
@@ -23,7 +23,7 @@ router.get('/cate', function(req, res, next) {
 
   //fetch active categories
   router.options('/cate/active', cors())
-  router.get('/cate/active', function(req, res, next) {
+  router.get('/cate/active',cors(), function(req, res, next) {
     const status = 1;
     const sql = `SELECT * FROM cate WHERE cate_active = ${status}`;
     db.query(sql, function(err, rows, fields) {
@@ -46,7 +46,7 @@ router.get('/cate', function(req, res, next) {
 // add category
 
 router.options('/cate/create', cors())
-router.post('/cate/create', function(req, res, next) {
+router.post('/cate/create', cors(), function(req, res, next) {
   const catename = req.body.catename;
   const catedescription = req.body.catedescription;
   const cateurl = req.body.cateurl;
