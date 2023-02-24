@@ -66,7 +66,25 @@ router.post('/qr/create',cors(), function(req, res, next) {
     })
   });  
   
-
+//pair qr
+router.options('/qr/pair/:qrid', cors())
+router.put('/qr/pair/:qrid',cors(), function(req, res, next) {
+ 
+    const qrunique = req.body.qrunique;
+    const qrid = req.params.qrid;
+    const sql = `UPDATE qr SET qr_unique = '${qrunique}' WHERE qr_id = '${qrid}'`;
+    
+    db.query(sql, function(err, result) {
+      if(err) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.status(500).send({ error: 'Something failed!' })
+      }
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+      // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+      res.status(200).send({'status': 'success', 'msg': 'updated successfully'})
+    })
+  });  
 
 
 
