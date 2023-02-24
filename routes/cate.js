@@ -33,6 +33,7 @@ router.get('/cate', function(req, res, next) {
         res.json([{status : true, data : rows, msg : "Catagories retrived successfully!"}])
       }else{
         res.setHeader('Content-Type', 'application/json');
+        res.setHeader("Access-Control-Allow-Origin", "*");
       res.json([{status : false, data : rows, msg : "Catagories retrived successfully!"}])
       }
       
