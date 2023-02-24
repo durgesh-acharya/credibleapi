@@ -44,6 +44,9 @@ router.get('/qr', function(req, res, next) {
 //create qr
 
 router.post('/qr/create', function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     const qrunique = req.body.qrunique;
     const qruse = req.body.qruse;
     const qrreedemed = req.body.qrreedemed;
@@ -57,9 +60,7 @@ router.post('/qr/create', function(req, res, next) {
       if(err) {
         res.status(500).send({ error: 'Something failed!' })
       }
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+     
       res.status(200).send({'status': 'success', 'id': result.insertId})
     })
   });  
