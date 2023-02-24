@@ -17,6 +17,7 @@ router.get('/cate',cors(), function(req, res, next) {
         res.status(500).send({ error: 'Something failed!' })
       }
       res.setHeader('Content-Type', 'application/json');
+      res.setHeader('Access-Control-Allow-Origin', '*');
       res.json([{status : true, data : rows, msg : "Catagories retrived successfully!"}])
     })
   });
@@ -60,6 +61,7 @@ router.post('/cate/create', cors(), function(req, res, next) {
     if(err) {
       res.status(500).send({ error: 'Something failed!' })
     }
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.status(200).send({'status': 'success', 'id': result.insertId})
   })
 });  
