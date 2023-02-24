@@ -14,6 +14,7 @@ const subcateRouter = require('./routes/subcate');
 const productRouter = require('./routes/product');
 const productimageurlRouter = require('./routes/prodimg');
 const qrRouter = require('./routes/qr');
+const reedemRouter = require('./routes/reedem');
 
 //use routes
 app.use(userRouter);
@@ -22,6 +23,7 @@ app.use(subcateRouter);
 app.use(productRouter);
 app.use(productimageurlRouter);
 app.use(qrRouter);
+app.use(reedemRouter);
 
 app.use(bodyParser.urlencoded({extended: true}));
 
