@@ -4,6 +4,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 
 
+
 const port = process.env.PORT || 3000
 
 //routes
@@ -23,6 +24,7 @@ app.use(productimageurlRouter);
 app.use(qrRouter);
 
 app.use(bodyParser.urlencoded({extended: true}));
+
 
 
 app.get('/', (req, res) => {

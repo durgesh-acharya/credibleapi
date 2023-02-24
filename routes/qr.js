@@ -57,6 +57,7 @@ router.post('/qr/create', function(req, res, next) {
       if(err) {
         res.status(500).send({ error: 'Something failed!' })
       }
+      res.setHeader('Content-Type', 'application/x-www-form-urlencoded');
       res.status(200).send({'status': 'success', 'id': result.insertId})
     })
   });  
