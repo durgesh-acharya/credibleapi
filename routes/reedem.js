@@ -52,9 +52,10 @@ router.post('/reedem/create',cors(), function(req, res, next) {
     const rrmadeby = req.body.rrmadeby;
     const rrupiid = req.body.rrupiid;
     const rrtranid = req.body.rrtranid;
+    const rrstatus = 0;
     
   
-    const sql = `INSERT INTO reedem(rr_qrid, rr_qrunique, qr_rupees, rr_madeby, rr_upiid, rr_tranid) VALUES ('${rrqrid}','${rrqrunique}','${rrqrrupees}','${rrmadeby}','${rrupiid}','${rrtranid}')`;
+    const sql = `INSERT INTO reedem(rr_qrid, rr_qrunique, qr_rupees, rr_madeby, rr_upiid, rr_tranid,rr_status) VALUES ('${rrqrid}','${rrqrunique}','${rrqrrupees}','${rrmadeby}','${rrupiid}','${rrtranid}','${rrstatus}')`;
     
     db.query(sql, function(err, result) {
       if(err) {
