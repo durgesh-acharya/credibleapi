@@ -133,5 +133,29 @@ router.get('/qr/usestatus/:qrunique', function(req, res, next) {
   })
 });
 
+//update qruse
+router.options('/qr/updatestatus/:qrunique', cors())
+router.put('/qr/updatestatus/:qrunique',cors(), function(req, res, next) {
+ 
+    const qruse = req.body.qruse;
+    const qrreedem = req.body.qrreedem;
+    const qrreedemby = req.body.qrreedemby;
+    const qrreedemstatus = req.body.qrreedemstatus;
+
+    const qrunique = req.params.qrunique;
+    const sql = `UPDATE qr SET qr_use = '${qruse}',qr_reedemed = '${qrreedem}',qr_reedemedby = '${qrreedemby}',qr_reedemstatus = '${qrreedemstatus}' WHERE qr_unique = '${qrunique}'`;
+    
+    db.query(sql, function(err, result) {
+      if(err) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.status(500).send({ error: 'Something failed!' })
+      }
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+      // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+      res.status(200).send({'status': 'success', 'msg': 'updated successfully'})
+    })
+  });  
+
 
 module.exports=router;
