@@ -91,6 +91,27 @@ router.get('/reedem/fromstatus/:status',cors(), function(req, res, next) {
     })
   });
 
+//update redeem
+router.options('/reedem/updatestatus/:rrid', cors())
+router.put('/reedem/updatestatus/:rrid',cors(), function(req, res, next) {
+ 
+    
+    const rrtran = req.body.rrtran;
+    const rrstatus = req.body.rrstatus;
+    const rrid = req.params.rrid;
+    const sql = `UPDATE reedem SET rr_tranid = '${rrtran}',rr_status = '${rrstatus}' WHERE rr_id = '${rrid}'`;
+    
+    db.query(sql, function(err, result) {
+      if(err) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.status(500).send({ error: 'Something failed!' })
+      }
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+      // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+      res.status(200).send({'status': 'success', 'msg': 'updated successfully'})
+    })
+  });  
 
 
 module.exports=router;
