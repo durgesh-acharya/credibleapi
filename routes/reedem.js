@@ -21,7 +21,8 @@ router.get('/reedem', function(req, res, next) {
   });
 
 //reedem madeby
-router.get('/reedem/frommadeby/:madeby', function(req, res, next) {
+router.options('/reedem/frommadeby/:madeby', cors())
+router.get('/reedem/frommadeby/:madeby',cors(), function(req, res, next) {
     const madeby = req.params.madeby;
     const sql = `SELECT * FROM reedem WHERE rr_madeby = ${madeby} ORDER BY rr_id DESC`;
     db.query(sql, function(err, rows, fields) {

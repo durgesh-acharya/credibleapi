@@ -5,6 +5,7 @@ const db = require('../db');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
+var cors = require('cors')
 
 // fetch all users
 router.get('/user', function(req, res, next) {
@@ -61,6 +62,29 @@ router.get('/user/bymobile/:mobile/:status', function(req, res, next) {
   })
 });
 
+//add user
 
+router.options('/user/create', cors())
+router.post('/user/create',cors(), function(req, res, next) {
+ 
+    const usermobile = req.body.usermobile;
+    const username = req.body.username;
+    const usercity = req.body.usercity;
+    const userduid = req.body.userduid;
+    const userstatus = 1;
+    
+  
+    const sql = `INSERT INTO user(user_mobile, user_name, user_city, user_duid,user_active) VALUES ('${usermobile}','${username}','${usercity}','${userduid}','${userstatus}')`;
+    
+    db.query(sql, function(err, result) {
+      if(err) {
+        res.status(500).send({ error: 'Something failed!' })
+      }
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+      // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+      res.status(200).send({'status': 'success', 'id': result.insertId})
+    })
+  });  
 
 module.exports=router;
