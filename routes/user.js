@@ -71,7 +71,7 @@ router.post('/user/create',cors(), function(req, res, next) {
     const username = req.body.username;
     const usercity = req.body.usercity;
     const userduid = req.body.userduid;
-    const userstatus = 1;
+    const userstatus = req.body.userstatus;
     
   
     const sql = `INSERT INTO user(user_mobile, user_name, user_city, user_duid,user_active) VALUES ('${usermobile}','${username}','${usercity}','${userduid}','${userstatus}')`;
