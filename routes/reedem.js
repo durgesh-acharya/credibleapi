@@ -69,7 +69,27 @@ router.post('/reedem/create',cors(), function(req, res, next) {
     })
   });  
 
-
+//fetch redeem from status
+router.options('/reedem/fromstatus/:status', cors())
+router.get('/reedem/fromstatus/:status',cors(), function(req, res, next) {
+    const status = req.params.status;
+    const sql = `SELECT * FROM reedem WHERE rr_status = ${status} ORDER BY rr_id DESC`;
+    db.query(sql, function(err, rows, fields) {
+      if (err) {
+        res.status(500).send({ error: 'Something failed!' });
+      }
+      if(rows.length > 0){
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.json([{status : true, data : rows, msg : "Reedem Request retrived successfully!"}])
+      }else{
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader("Access-Control-Allow-Origin", "*");
+      res.json([{status : false, data : rows, msg : "Reedem Request retrived successfully!"}])
+      }
+      
+    })
+  });
 
 
 
