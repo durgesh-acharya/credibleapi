@@ -37,7 +37,9 @@ router.get('/cate',cors(), function(req, res, next) {
       }else{
         res.setHeader('Content-Type', 'application/json');
         res.setHeader("Access-Control-Allow-Origin", "*");
-      
+        res.header("Access-Control-Allow-Headers",
+         "Origin, X-Requested-With, Content-Type, Accept"
+        );
       res.json([{status : false, data : rows, msg : "Catagories retrived successfully!"}])
       }
       
