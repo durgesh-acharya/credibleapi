@@ -5,9 +5,11 @@ const db = require('../db');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
+var cors = require('cors')
 
 // fetch all sub-categories
-router.get('/subcate', function(req, res, next) {
+router.options('/subcate', cors())
+router.get('/subcate',cors(), function(req, res, next) {
 
     const sql = "SELECT * FROM subcate";
     db.query(sql, function(err, rows, fields) {
@@ -20,8 +22,8 @@ router.get('/subcate', function(req, res, next) {
   });
 
    //fetch active sub-categories
-
-   router.get('/subcate/active', function(req, res, next) {
+   router.options('/subcate/active', cors())
+   router.get('/subcate/active',cors(), function(req, res, next) {
     const status = 1;
     const sql = `SELECT * FROM subcate WHERE subcate_status = ${status}`;
     db.query(sql, function(err, rows, fields) {
@@ -42,8 +44,8 @@ router.get('/subcate', function(req, res, next) {
   
 
   //fetch sub category by category id
-
-  router.get('/subcate/:cate/:status', function(req, res, next) {
+  router.options('/subcate/:cate/:status', cors())
+  router.get('/subcate/:cate/:status',cors(), function(req, res, next) {
     const cate = req.params.cate;
     const status = req.params.status;
   
@@ -63,8 +65,8 @@ router.get('/subcate', function(req, res, next) {
 
   //fetch subcate irespective of status
 
-
-   router.get('/subcateall/:cate', function(req, res, next) {
+  router.options('/subcateall/:cate', cors())
+   router.get('/subcateall/:cate',cors(),function(req, res, next) {
     const cate = req.params.cate;
     const sql = `SELECT * FROM subcate WHERE subcate_cate = ${cate}`;
     db.query(sql, function(err, rows, fields) {
@@ -84,8 +86,8 @@ router.get('/subcate', function(req, res, next) {
 
   // add subcategory
 
- 
-router.post('/subcate/create', function(req, res, next) {
+  router.options('/subcate/create', cors())
+router.post('/subcate/create',cors(),function(req, res, next) {
   const subcatename = req.body.subcatename;
   const subcatedescription = req.body.subcatedescription;
   const subcateurl = req.body.subcateurl;
