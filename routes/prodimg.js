@@ -31,8 +31,8 @@ router.get('/prodimg/:prodid', function(req, res, next) {
 
 
 //add product image
-router.options('/prodimgcreate/create', cors())
-router.post('/prodimgcreate/create',cors(),function(req, res, next) {
+router.options('/prodimg/create', cors())
+router.post('/prodimg/create',cors(),function(req, res, next) {
   const prodimgprod = req.body.prodimgprod;
   const prodimgurl = req.body.prodimgurl;
   
@@ -41,9 +41,11 @@ router.post('/prodimgcreate/create',cors(),function(req, res, next) {
   db.query(sql, function(err, result) {
     if(err) {
       res.status(500).send({ error: 'Something failed!' })
-    }
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    }else{
+      res.setHeader('Access-Control-Allow-Origin', '*')
     res.status(200).send({'status': 'success', 'id': result.insertId})
+    }
+    
   })
 });  
 

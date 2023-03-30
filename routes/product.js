@@ -122,9 +122,11 @@ router.post('/prod/create',cors(),function(req, res, next) {
   db.query(sql, function(err, result) {
     if(err) {
       res.status(500).send({ error: 'Something failed!' })
-    }
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    }else{
+      res.setHeader('Access-Control-Allow-Origin', '*')
     res.status(200).send({'status': 'success', 'id': result.insertId})
+    }
+    
   })
 });  
 
