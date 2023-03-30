@@ -5,6 +5,7 @@ const db = require('../db');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
+var cors = require('cors')
 
 
 //fetch all products
@@ -102,6 +103,30 @@ router.get('/prod/byid/:id', function(req, res, next) {
       
   })
 })
+
+//add product
+
+router.options('/prod/create', cors())
+router.post('/prod/create',cors(),function(req, res, next) {
+  const prodcate = req.body.prodcate;
+  const prodsubcate = req.body.prodsubcate;
+  const prodname = req.body.prodname;
+  const proddescription = req.body.proddescription;
+  const produrl = req.body.produrl;
+  const prodstatus = req.body.prodstatus;
+
+
+  
+  const sql = `INSERT INTO prod(prod_cate,prod_subcate,prod_name,prod_description,prod_url,prod_status) VALUES ('${prodcate}','${prodsubcate}','${prodname}','${proddescription}','${produrl}','${prodstatus}')`;
+  
+  db.query(sql, function(err, result) {
+    if(err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.status(200).send({'status': 'success', 'id': result.insertId})
+  })
+});  
 
 
 module.exports=router;

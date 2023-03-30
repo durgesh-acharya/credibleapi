@@ -5,6 +5,7 @@ const db = require('../db');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
+var cors = require('cors')
 
 //fetch productimageurl by productid
 
@@ -29,7 +30,23 @@ router.get('/prodimg/:prodid', function(req, res, next) {
   });
 
 
-
+//add product image
+router.options('/prodimg/create', cors())
+router.post('/prodimg/create',cors(),function(req, res, next) {
+  const prodimgprod = req.body.prodimgprod;
+  const prodimgurl = req.body.prodimgurl;
+  
+  const sql = `INSERT INTO prodimg(prodimg_prod,prodimg_url) VALUES ('${prodimgprod}','${prodimgurl}')`;
+  
+  db.query(sql, function(err, result) {
+    if(err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Content-Type', 'application/json')
+    res.status(200).send({'status': 'success', 'id': result.insertId})
+  })
+});  
 
 
 
