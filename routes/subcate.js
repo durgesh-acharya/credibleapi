@@ -92,7 +92,7 @@ router.post('/subcate/create',cors(),function(req, res, next) {
   const subcatedescription = req.body.subcatedescription;
   const subcateurl = req.body.subcateurl;
   const subcatecate = req.body.subcatecate;
-  const subcatestatus = req.body.subcatestatus;
+  const subcatestatus = 1;
 
 
   
