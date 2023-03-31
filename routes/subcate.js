@@ -106,7 +106,24 @@ router.post('/subcate/create',cors(),function(req, res, next) {
   })
 });  
 
-  
+  //delete
+  //delete
+
+
+router.delete('/subcatedelete/:subcateid', function(req, res, next) {
+  const subcateid = req.params.subcateid;
+  const sql = `DELETE FROM subcate WHERE subcate_id = ${subcateid}`;
+  db.query(sql, function(err, rows, fields) {
+    if (err) {
+      res.status(500).send({ 'error': 'Something failed!' })
+    }
+    else{
+      res.status(200).send({'status': 'success', 'message': 'Deleted Succesfully!'})
+    }
+    
+  })
+});
+
 
 
 
