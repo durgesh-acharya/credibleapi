@@ -130,5 +130,22 @@ router.post('/prod/create',cors(),function(req, res, next) {
   })
 });  
 
+//delete
+
+
+router.delete('/proddelete/:prodid', function(req, res, next) {
+  const prodid = req.params.prodid;
+  const sql = `DELETE FROM prod WHERE prod_id = ${prodid}`;
+  db.query(sql, function(err, rows, fields) {
+    if (err) {
+      res.status(500).send({ 'error': 'Something failed!' })
+    }
+    else{
+      res.status(200).send({'status': 'success', 'message': 'Deleted Succesfully!'})
+    }
+    
+  })
+});
+
 
 module.exports=router;
