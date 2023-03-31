@@ -49,6 +49,22 @@ router.post('/prodimg/create',cors(),function(req, res, next) {
   })
 });  
 
+//delete
+
+
+router.delete('/prodimgdelete/:prodid', function(req, res, next) {
+  const prodid = req.params.prodid;
+  const sql = `DELETE FROM prodimg WHERE prodimg_id = ${prodid}`;
+  db.query(sql, function(err, rows, fields) {
+    if (err) {
+      res.status(500).send({ 'error': 'Something failed!' })
+    }
+    else{
+      res.status(200).send({'status': 'success', 'message': 'Deleted Succesfully!'})
+    }
+    
+  })
+});
 
 
 module.exports=router;
