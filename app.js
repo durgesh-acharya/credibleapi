@@ -15,6 +15,7 @@ const productRouter = require('./routes/product');
 const productimageurlRouter = require('./routes/prodimg');
 const qrRouter = require('./routes/qr');
 const reedemRouter = require('./routes/reedem');
+const adminRouter = require('./routes/admin')
 
 //use routes
 app.use(userRouter);
@@ -24,6 +25,7 @@ app.use(productRouter);
 app.use(productimageurlRouter);
 app.use(qrRouter);
 app.use(reedemRouter);
+app.use(adminRouter);
 
 app.use(bodyParser.urlencoded({extended: true}));
 
