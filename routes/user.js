@@ -62,6 +62,8 @@ router.get('/user/bymobile/:mobile/:status', function(req, res, next) {
   })
 });
 
+
+
 //add user
 
 router.options('/user/create', cors())
