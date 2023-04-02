@@ -113,5 +113,69 @@ router.put('/reedem/updatestatus/:rrid',cors(), function(req, res, next) {
     })
   });  
 
+  //redeem nums
+
+router.get('/redeemnums', function(req, res, next) {
+
+  const sql = "SELECT * FROM reedem";
+  db.query(sql, function(err, rows, fields) {
+    if (err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }
+  else{
+    res.setHeader('Content-Type', 'application/json');
+    res.json([{status : true, msg : rows.length}])
+  }
+  })
+});
+
+//redeem rupees total
+
+router.get('/redeemtotal', function(req, res, next) {
+
+  const sql = "SELECT SUM(qr_rupees) as total FROM reedem";
+  db.query(sql, function(err, rows, fields) {
+    if (err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }
+    else{
+      res.setHeader('Content-Type', 'application/json');
+      res.json([{status : true, data : rows}])
+    }
+  })
+});
+
+//redeem rupees total pending
+
+router.get('/redeempendingtotal', function(req, res, next) {
+
+  const sql = "SELECT SUM(qr_rupees) as total FROM reedem WHERE rr_status = 0";
+  db.query(sql, function(err, rows, fields) {
+    if (err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }
+    else{
+      res.setHeader('Content-Type', 'application/json');
+      res.json([{status : true, data : rows}])
+    }
+  })
+});
+
+//redeemd rupees total settled
+
+router.get('/redeemsettledtotal', function(req, res, next) {
+
+  const sql = "SELECT SUM(qr_rupees) as total FROM reedem WHERE rr_status = 1";
+  db.query(sql, function(err, rows, fields) {
+    if (err) {
+      res.status(500).send({ error: 'Something failed!' })
+    }else{
+      res.setHeader('Content-Type', 'application/json');
+      res.json([{status : true, data : rows}])
+    }
+   
+  })
+});
+
 
 module.exports=router;
