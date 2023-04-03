@@ -11,8 +11,8 @@ var cors = require('cors')
 //admin auth
 
 
- 
-router.get('/admin/auth/:mobile/:password', function(req, res, next) {
+router.options('/admin/auth/:mobile/:password', cors())
+router.get('/admin/auth/:mobile/:password',cors(), function(req, res, next) {
     const mobile = req.params.mobile;
     const password = req.params.password;
   

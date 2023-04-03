@@ -114,8 +114,8 @@ router.put('/reedem/updatestatus/:rrid',cors(), function(req, res, next) {
   });  
 
   //redeem nums
-
-router.get('/redeemnums', function(req, res, next) {
+  router.options('/redeemnums', cors())
+router.get('/redeemnums',cors(), function(req, res, next) {
 
   const sql = "SELECT * FROM reedem";
   db.query(sql, function(err, rows, fields) {
@@ -130,8 +130,8 @@ router.get('/redeemnums', function(req, res, next) {
 });
 
 //redeem rupees total
-
-router.get('/redeemtotal', function(req, res, next) {
+router.options('/redeemtotal', cors())
+router.get('/redeemtotal',cors(), function(req, res, next) {
 
   const sql = "SELECT SUM(qr_rupees) as total FROM reedem";
   db.query(sql, function(err, rows, fields) {
@@ -146,8 +146,8 @@ router.get('/redeemtotal', function(req, res, next) {
 });
 
 //redeem rupees total pending
-
-router.get('/redeempendingtotal', function(req, res, next) {
+router.options('/redeempendingtotal', cors())
+router.get('/redeempendingtotal',cors(), function(req, res, next) {
 
   const sql = "SELECT SUM(qr_rupees) as total FROM reedem WHERE rr_status = 0";
   db.query(sql, function(err, rows, fields) {
@@ -162,8 +162,8 @@ router.get('/redeempendingtotal', function(req, res, next) {
 });
 
 //redeemd rupees total settled
-
-router.get('/redeemsettledtotal', function(req, res, next) {
+router.options('/redeemsettledtotal', cors())
+router.get('/redeemsettledtotal',cors(), function(req, res, next) {
 
   const sql = "SELECT SUM(qr_rupees) as total FROM reedem WHERE rr_status = 1";
   db.query(sql, function(err, rows, fields) {

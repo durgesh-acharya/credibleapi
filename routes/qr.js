@@ -159,8 +159,8 @@ router.put('/qr/updatestatus/:qrunique',cors(), function(req, res, next) {
 
 //qr numbs
 
-
-router.get('/qrnums', function(req, res, next) {
+router.options('/qrnums', cors())
+router.get('/qrnums', cors(),function(req, res, next) {
 
   const sql = "SELECT * FROM qr ORDER BY qr_id DESC";
   db.query(sql, function(err, rows, fields) {
@@ -175,8 +175,8 @@ router.get('/qrnums', function(req, res, next) {
 
 //qr nums by redeem
 
-
-router.get('/qrredeemnums', function(req, res, next) {
+router.options('/qrredeemnums', cors())
+router.get('/qrredeemnums',cors(), function(req, res, next) {
 
   const sql = "SELECT * FROM qr WHERE qr_reedemstatus = 1";
   db.query(sql, function(err, rows, fields) {
@@ -190,8 +190,8 @@ router.get('/qrredeemnums', function(req, res, next) {
 
 //total rupees of qr generate
 
-
-router.get('/qrrupees', function(req, res, next) {
+router.options('/qrrupees', cors())
+router.get('/qrrupees',cors(), function(req, res, next) {
 
   const sql = "SELECT SUM(qr_rupees) as total FROM qr";
   db.query(sql, function(err, rows, fields) {
