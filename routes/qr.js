@@ -106,6 +106,27 @@ router.put('/qr/block/:qrid',cors(), function(req, res, next) {
     })
   }); 
 
+  //unblock qr
+  //block qr
+router.options('/qr/unblock/:qrid', cors())
+router.put('/qr/unblock/:qrid',cors(), function(req, res, next) {
+ 
+    const qruse = req.body.qruse;
+    const qrid = req.params.qrid;
+    const sql = `UPDATE qr SET qr_use = '${qruse}' WHERE qr_id = '${qrid}'`;
+    
+    db.query(sql, function(err, result) {
+      if(err) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.status(500).send({ error: 'Something failed!' })
+      }
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+      // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+      res.status(200).send({'status': 'success', 'msg': 'updated successfully'})
+    })
+  }); 
+
 
 
 //update qr on receiving reedem request
