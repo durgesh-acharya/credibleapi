@@ -10,7 +10,7 @@ var cors = require('cors')
 // fetch all users
 router.get('/user', function(req, res, next) {
 
-    const sql = "SELECT * FROM user";
+    const sql = "SELECT * FROM user ORDER BY user_id DESC";
     db.query(sql, function(err, rows, fields) {
       if (err) {
         res.status(500).send({ error: 'Something failed!' })
