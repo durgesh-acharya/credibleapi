@@ -8,7 +8,8 @@ router.use(bodyParser.json());
 var cors = require('cors')
 
 // fetch all users
-router.get('/user', function(req, res, next) {
+router.options('/user', cors())
+router.get('/user',cors(), function(req, res, next) {
 
     const sql = "SELECT * FROM user ORDER BY user_id DESC";
     db.query(sql, function(err, rows, fields) {
@@ -21,8 +22,8 @@ router.get('/user', function(req, res, next) {
   });
 
   //user existence check
- 
-router.get('/user/exist/:mobile/:status', function(req, res, next) {
+  router.options('/user/exist/:mobile/:status', cors())
+router.get('/user/exist/:mobile/:status',cors(), function(req, res, next) {
     const mobile = req.params.mobile;
     const activestts = req.params.status;
   
@@ -43,8 +44,8 @@ router.get('/user/exist/:mobile/:status', function(req, res, next) {
   //user by mobile number
 
    //user existence check
- 
-router.get('/user/bymobile/:mobile/:status', function(req, res, next) {
+router.options('/user/bymobile/:mobile/:status', cors()) 
+router.get('/user/bymobile/:mobile/:status',cors(), function(req, res, next) {
   const mobile = req.params.mobile;
   const activestts = req.params.status;
 
